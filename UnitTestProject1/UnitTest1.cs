@@ -16,7 +16,7 @@ namespace UnitTestProject1
         [TestInitialize]
         public void BeginTest()
         {
-            _p = new Person("Magne");
+            _p = new Person("Peter", 21, "xxxxxx-xxxx");
         }
 
         [TestMethod]
@@ -36,6 +36,56 @@ namespace UnitTestProject1
             _p.Age = 18.01;
             result = _p.isAdult();
             Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void TestEquality()
+        {
+            // Person 1 is initialized
+            Person p = new Person("Peter", 21, "xxxxxx-xxxx");
+
+            // Person 2 is initialized
+            Person otherPerson = new Person("Peter", 21, "xxxxxx-xxxx");
+
+            //p.Equals(otherPerson);
+
+            // Test if these two persons are identical
+            Assert.AreEqual(p, otherPerson);
+        }
+
+        [TestMethod]
+        public void TestInequality()
+        {
+            // Person 1 is initialized
+            Person p = new Person("Peter", 21, "xxxxxx-xxxx");
+
+            // Person 2 is initialized
+            Person otherPerson = new Person("Martin", 21, "xxxxxx-xxxx");
+
+            //p.Equals(otherPerson);
+
+            // Test if these two persons are identical
+            Assert.AreNotEqual(p, otherPerson);
+        }
+
+        [TestMethod]
+        public void AgeException()
+        {
+            Person p = new Person("Peter", 21, "xxxxxx-xxxx");
+
+            try
+            {
+                p.Age = -21;
+                Assert.Fail();
+            }
+            catch (AgeException ageException)
+            {
+                Assert.AreEqual("Alder for lav!", ageException.Message);
+            }
+            catch (Exception e)
+            {
+                Assert.Fail();
+            }
         }
     }
 }
